@@ -1,0 +1,73 @@
+<!-- <full-calendar [options]="calendarOptions"></full-calendar>
+<div *ngIf="selectTime" >
+<input [ngxTimepicker]="picker">
+<ngx-material-timepicker #picker></ngx-material-timepicker>
+</div> -->
+
+  <div class="demo-app">
+    <div class="demo-app-service">
+    <mat-form-field appearance="fill">
+      
+      <mat-label>Select Service Type</mat-label>
+        <input type="text"
+              matInput
+              [formControl]="searchControl"
+              required
+              [matAutocomplete]="auto">
+   
+
+    <mat-autocomplete #auto="matAutocomplete" >
+      <mat-option *ngFor="let item of filteredResults$ | async" [value]="item">
+        <span [innerHTML]="item "></span>
+      </mat-option>
+    </mat-autocomplete>
+    </mat-form-field>
+  </div>
+<!-- </div> -->
+<div class="demo-app-main">
+<full-calendar [options]="calendarOptions"></full-calendar></div>
+<div >
+<mat-card *ngIf="selectTime" class="time-card">
+  <mat-card-title>Choose Time for Day {{this.day}}</mat-card-title>
+  <mat-card-content>
+  <mat-form-field  appearance="outline">
+                
+      <mat-label>Start Time</mat-label>
+      
+  <input 
+  #startTime 
+  matInput 
+  [formControl]="endTimeControl"
+  [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete" >
+    <mat-option *ngFor="let item of filteredTime$ | async" [value]="item">
+      {{item}}
+    </mat-option>
+  </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field  appearance="outline">
+      <mat-label>End Time</mat-label>
+      <input #endTime 
+      matInput
+      [formControl]="endTimeControl"
+      [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" >
+        <mat-option *ngFor="let item of filteredTime$ | async" [value]="item">
+          {{item}}
+        </mat-option>
+      </mat-autocomplete>
+      
+  </mat-form-field>
+
+
+</mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-button (click)="handleCloseTimeSlotCard()">CANCEL</button>
+    <button mat-button (click)="handleCreateSlotCard(startTime.value, endTime.value)">CREATE SLOT</button>
+  </mat-card-actions>
+</mat-card>
+</div>
+
+</div>
+<!-- </div> -->

@@ -1,0 +1,51 @@
+<!-- <full-calendar [options]="calendarOptions"></full-calendar>
+<div *ngIf="selectTime" >
+<input [ngxTimepicker]="picker">
+<ngx-material-timepicker #picker></ngx-material-timepicker>
+</div> -->
+<div>
+    <form [formGroup]="serviceForm" class="example-form-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Select Service Type</mat-label>
+          <input type="text"
+                matInput
+                formControlName="serviceGroup"
+                required
+                [matAutocomplete]="autoGroup">
+          <mat-autocomplete #autoGroup="matAutocomplete">
+            <mat-optgroup *ngFor="let service of serviceGroupOptions | async" [label]="service.letter">
+              <mat-option *ngFor="let name of service.names" [value]="name">
+                {{name}}
+              </mat-option>
+            </mat-optgroup>
+          </mat-autocomplete>
+      </mat-form-field>
+    </form>
+<!-- <full-calendar [options]="calendarOptions"></full-calendar> -->
+<!-- <div class="time-card"> -->
+<!-- <mat-card *ngIf="selectTime" >
+    <mat-card-title>Choose Time for Day + {{this.day}}</mat-card-title>
+    
+    <div>
+        
+    <mat-form-field  appearance="outline">
+                  
+        <mat-label>Start Time</mat-label>
+        
+    <input matInput>
+    </mat-form-field>
+
+    <mat-form-field  appearance="outline">
+        <mat-label>End Time</mat-label>
+        <input matInput>
+        
+    </mat-form-field>
+
+</div>
+    <mat-card-actions align="end">
+      <button mat-button>CANCEL</button>
+      <button mat-button>CREATE SLOT</button>
+    </mat-card-actions>
+  </mat-card> -->
+<!-- </div> -->
+</div>

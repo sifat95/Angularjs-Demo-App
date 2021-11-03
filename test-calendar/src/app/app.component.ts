@@ -6,7 +6,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {startWith, map} from 'rxjs/operators';
 import { DateClickArg } from '@fullcalendar/interaction';
-import { SERVICE_LIST, TIME_LIST } from './service-list';
+import { SERVICE_LIST, TIME_LIST } from './data.list';
 import { FormControl } from '@angular/forms';
 
 
@@ -29,18 +29,17 @@ export class AppComponent {
   endTime = '';
   value = "Clear me";
   dayClickedEl:DateClickArg;
+  events = [];
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     dateClick: this.handleDateClick.bind(this), // bind is important!
     events: [
-      { title: 'event 1', date: '2019-04-01' },
-      { title: 'event 2', date: '2019-04-02' }
+    // {title: "d", date: "2021-11-19"}
     ],
-    headerToolbar: {
-      start: '',
-      center: 'prev,title,next',
-      end: ''
+    eventClick: function(events) {
+      events.el.style.backgroundColor = '#3F51B5';
     },
+    
     footerToolbar: false,
     views: {
       timeGridFourDay: {
@@ -73,14 +72,16 @@ export class AppComponent {
     this.selectTime = false;
     this.startTime = startTime;
     this.endTime = endTime;
-    let s = "Doctor Jake " + this.startTime +"-"+this.endTime;
-    this.calendarOptions.events = [{title: s , date: this.day}]
-    alert("Slot Created for " + this.day + " " + startTime + "-" + endTime)
+  
+    this.events.push({title: "Doctor Jake " + this.startTime +"-"+this.endTime , start : this.day, end: this.day});
+   
+    this.calendarOptions.events = this.events;
+      
+    
     this.changeSelectedCellStyle("#FFF", 1);
   }
   searchControl: FormControl;
-  startTimeControl: FormControl;
-  endTimeControl: FormControl;
+  timeControl: FormControl;
   filteredResults$: Observable<string[]>;
   filteredTime$: Observable<string[]>;
   
@@ -90,15 +91,14 @@ export class AppComponent {
   
   constructor(private route: ActivatedRoute) {
     this.searchControl = new FormControl('');
-    this.startTimeControl = new FormControl('');
-    this.endTimeControl = new FormControl('');
+    this.timeControl = new FormControl('');
     this.filteredResults$ = this.searchControl.valueChanges
     .pipe(
       startWith(''),
       map(val => this.filterResults(val)),
       map(val => val.slice(0, 4))
     );
-    this.filteredTime$ = this.endTimeControl.valueChanges
+    this.filteredTime$ = this.timeControl.valueChanges
     .pipe(
       startWith(''),
       map(val => this.filterTime(val)),

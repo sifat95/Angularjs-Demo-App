@@ -6,13 +6,15 @@
     /*top:50%;
     left: 40%;
     /* background-color: cadetblue; */
-    width: 500px;
+    max-width: 100%;
+    width: 60%;
     /* margin: 0 auto; */
     z-index: 9999; 
-    left: 50%;
-    top: 50%; 
-    /* width: 80%; */
-    /* margin: inherit inherit; */
+    left: 10px;
+    right: 10px;
+    top: 30%;   
+    /* width: 80%;
+    margin: 10 10;
   }
   
 
@@ -51,9 +53,13 @@
     /* padding: 3em; */
     
   }
-  .visible {
-    z-index: 999999;
+  .slot-input-padding {
+    padding: 40px;
+    width: 35%;
   }
-  
-  
+  .card-button {
+    color: #3F51B5;
+    
+  }
+ 
   
